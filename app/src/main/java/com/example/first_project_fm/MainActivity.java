@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
         //resultText.setText(inputText.getText().toString() + " " + filtrText.getText().toString());
-        anagramText = Anagram.buildAnagram(inputText.getText().toString(), filtrText.getText().toString());
+        anagramText = new Anagram().buildAnagram(inputText.getText().toString(), filtrText.getText().toString());
         resultText.setText(anagramText);
     }
 
