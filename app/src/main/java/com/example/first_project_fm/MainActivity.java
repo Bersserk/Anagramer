@@ -10,9 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements TextWatcher {
-
-    public static String TAG = "log";
-
+    
     private EditText inputText;
     private EditText filtrText;
     private TextView resultText;
@@ -39,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
 
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        //resultText.setText(inputText.getText().toString() + " " + filtrText.getText().toString());
+
         anagramText = new Anagram().buildAnagram(inputText.getText().toString(), filtrText.getText().toString());
         resultText.setText(anagramText);
     }

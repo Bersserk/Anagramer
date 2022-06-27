@@ -1,7 +1,5 @@
 package com.example.first_project_fm;
 
-import android.util.Log;
-
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -10,19 +8,15 @@ import java.util.regex.Pattern;
 public class Anagram {
 
     public static String TAG = "log";
-
-
-    private TreeMap<Integer, String> states = new TreeMap<Integer, String>();
-
+    private String sOutput = "";
 
     String buildAnagram(String input, String filtr) {
 
         String strFiltr;
-        String sOutput = "";
 
         // задаем фильтр по умолчанию либо пользовательский
         if (filtr.isEmpty()) {
-            strFiltr = "[^\\W\\d]";
+            strFiltr = "[\\W*\\d*]";
         } else {
             strFiltr = "[" + filtr + "]";
         }
@@ -34,56 +28,39 @@ public class Anagram {
 
         // смотрим каждое слово в массиве
         for (String s : arrayWords) {
+            makeAnagram(s, p);
+            sOutput += " ";
+        }
+        return sOutput;
+    }
 
-            addFilteringValues(s, p);
-            // addNonFilterValues();
+    private String makeAnagram(String s, Pattern p) {
+        TreeMap<Integer, String> states = new TreeMap<Integer, String>();
+        StringBuilder stringBuilder = new StringBuilder(s);
+        Matcher m = p.matcher(s);
 
+        int i = 0;
+        while (m.find()) {
+            states.put(m.start(), m.group());
+            stringBuilder.deleteCharAt(m.start() - i);
+            i++;
         }
 
+        char arr[] = stringBuilder.reverse().toString().toCharArray(); // convert the String object to array of char
 
-        // перебор элементов
+        int k = 0;
+        for (char c : arr) {
+            while (states.containsKey(k)) {
+                k++;
+            }
+            states.put(k, String.valueOf(c));
+        }
+
         for (
-                Map.Entry<Integer, String> item : this.states.entrySet()) {
-            sOutput += item.getValue() + " (" + item.getKey() + ")";
-        }
-        sOutput += " ";
-
-        return sOutput + " ";
-    }
-
-    private void addFilteringValues(String s, Pattern p) {
-        Matcher m = p.matcher(s);
-        while (m.find()) {
-
-            if (!s.equals(m.group())) {
-                Log.i(TAG, "строка равно фильтру");
-                states.put(m.start(), m.group());
-                Log.i(TAG, states.get(m.start()));
-            }
-
-
-        }
-    }
-
-    private void addValue(TreeMap<Integer, String> st, String s, Pattern p) {
-        Matcher m = p.matcher(s);
-
-        while (m.find()) {
-
-            for (int i = s.length() - 1; i >= 0; i--) {
-                while (i >= 0 && !states.containsKey(i)) {
-                    i--;
-                }
-                states.put(i + 1, m.group());
-            }
-
+                Map.Entry<Integer, String> item : states.entrySet()) {
+            this.sOutput += item.getValue();
         }
 
-
+        return this.sOutput;
     }
-
-
-
-
-
 }
