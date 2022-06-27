@@ -1,0 +1,8 @@
+com/example/first_project_fm/BuildConfig.java
+ com.example.first_project_fm.BuildConfig
+com/example/first_project_fm/Test.java
+ com.example.first_project_fm.Test
+com/example/first_project_fm/MainActivity.java
+ com.example.first_project_fm.MainActivity
+com/example/first_project_fm/Anagram.java
+ com.example.first_project_fm.Anagram
