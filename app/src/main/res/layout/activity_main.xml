@@ -10,34 +10,30 @@
         android:id="@+id/inputText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="32dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/add_your_text"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.015" />
+        app:layout_constraintVertical_bias="0.15"
+        app:layout_constraintWidth_percent="0.85" />
 
     <EditText
         android:id="@+id/filtrText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/add_your_filtrText"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputText" />
+        app:layout_constraintTop_toBottomOf="@+id/inputText"
+        app:layout_constraintWidth_percent="0.85" />
 
     <TextView
         android:id="@+id/anagramText"
@@ -45,6 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:hint="@string/anagramText"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/filtrText"
         app:layout_constraintStart_toStartOf="@+id/filtrText"
         app:layout_constraintTop_toBottomOf="@+id/filtrText" />
