@@ -4,7 +4,7 @@ public class Anagram {
 
     static String buildAnagram(String input, String filter) {
 
-        String output = "";
+        StringBuilder output = new StringBuilder();
 
         // Dividing a string into words and adding them into array of words
         String[] arrayWords = input.split("\\s");
@@ -17,35 +17,58 @@ public class Anagram {
 
         // Making the anagram for each word
         for (String word : arrayWords) {
-            output += buildAnagramOfWord(word, mFilter);
+            output.append(buildAnagramOfWord(word, mFilter));
         }
 
-        return output;
+        return output.toString();
     }
 
     private static String buildAnagramOfWord(String word, String mFilter) {
-        StringBuilder returnString = new StringBuilder();
-        char[] inputArray = word.toCharArray();
 
-        // selecting characters that do not match the filter
-        for (Character charArray : inputArray) {
-            boolean result = charArray.toString().matches(mFilter);
-            if (!result)
-                returnString.append(charArray);
+        for (int i = 0, k = word.length() - 1; i < k; i++, k--) {
+            switch (moveOrNot(word.charAt(i), word.charAt(k), mFilter)) {
+                case 1:
+                    while (String.valueOf(word.charAt(i)).matches(mFilter)) {
+                        i++;
+                    }
+                case 2:
+                    while (String.valueOf(word.charAt(k)).matches(mFilter)) {
+                        k--;
+                    }
+                case 4:
+                    word = changeChars(i, k, word);
+                    break;
+                case 3:
+                    i++;
+                    k--;
+                    break;
+            }
         }
+        return word + " ";
+    }
 
-        returnString.reverse();
-
-        // adding characters that do match the filter
-        int k = 0;
-        for (Character charArray : inputArray) {
-            boolean result = charArray.toString().matches(mFilter);
-            if (result)
-                returnString.insert(k, charArray);
-            k++;
+    // filtering method. Returns '1' if the first letter filters, '2' if the second, '4' if none and '3' if both
+    private static int moveOrNot(char first, char second, String filter) {
+        boolean result1 = String.valueOf(first).matches(filter);
+        boolean result2 = String.valueOf(second).matches(filter);
+        if (result1 && result2) {
+            return 3;
+        } else if (result1) {
+            return 1;
+        } else if (result2) {
+            return 2;
+        } else {
+            return 4;
         }
+    }
 
-        return returnString.toString() + " ";
+    // method for change words
+    private static String changeChars(int index1, int index2, String tempIn) {
+        StringBuilder tempV = new StringBuilder(tempIn);
+        char temp = tempV.charAt(index1);
+        tempV.setCharAt(index1, tempV.charAt(index2));
+        tempV.setCharAt(index2, temp);
+        return tempV.toString();
     }
 
 }
