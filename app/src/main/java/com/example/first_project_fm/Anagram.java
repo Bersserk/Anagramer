@@ -1,66 +1,51 @@
 package com.example.first_project_fm;
 
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Anagram {
 
-    public static String TAG = "log";
-    private String sOutput = "";
+    static String buildAnagram(String input, String filter) {
 
-    String buildAnagram(String input, String filtr) {
+        String output = "";
 
-        String strFiltr;
+        // Dividing a string into words and adding them into array of words
+        String[] arrayWords = input.split("\\s");
 
-        // задаем фильтр по умолчанию либо пользовательский
-        if (filtr.isEmpty()) {
-            strFiltr = "[\\W*\\d*]";
-        } else {
-            strFiltr = "[" + filtr + "]";
+        // Determining the filter
+        String mFilter = "[" + filter + "]";
+        if (filter.equals("")) {
+            mFilter = "[\\W\\d*]";
         }
 
-        Pattern p = Pattern.compile(strFiltr);
-
-        // Делим строку на слова (если в строке их больше одного) и заносим в массив слов
-        String[] arrayWords = Pattern.compile("\\s").split(input);
-
-        // смотрим каждое слово в массиве
-        for (String s : arrayWords) {
-            makeAnagram(s, p);
-            sOutput += " ";
+        // Making the anagram for each word
+        for (String word : arrayWords) {
+            output += buildAnagramOfWord(word, mFilter);
         }
-        return sOutput;
+
+        return output;
     }
 
-    private String makeAnagram(String s, Pattern p) {
-        TreeMap<Integer, String> states = new TreeMap<Integer, String>();
-        StringBuilder stringBuilder = new StringBuilder(s);
-        Matcher m = p.matcher(s);
+    private static String buildAnagramOfWord(String word, String mFilter) {
+        StringBuilder returnString = new StringBuilder();
+        char[] inputArray = word.toCharArray();
 
-        int i = 0;
-        while (m.find()) {
-            states.put(m.start(), m.group());
-            stringBuilder.deleteCharAt(m.start() - i);
-            i++;
+        // selecting characters that do not match the filter
+        for (Character charArray : inputArray) {
+            boolean result = charArray.toString().matches(mFilter);
+            if (!result)
+                returnString.append(charArray);
         }
 
-        char arr[] = stringBuilder.reverse().toString().toCharArray(); // convert the String object to array of char
+        returnString.reverse();
 
+        // adding characters that do match the filter
         int k = 0;
-        for (char c : arr) {
-            while (states.containsKey(k)) {
-                k++;
-            }
-            states.put(k, String.valueOf(c));
+        for (Character charArray : inputArray) {
+            boolean result = charArray.toString().matches(mFilter);
+            if (result)
+                returnString.insert(k, charArray);
+            k++;
         }
 
-        for (
-                Map.Entry<Integer, String> item : states.entrySet()) {
-            this.sOutput += item.getValue();
-        }
-
-        return this.sOutput;
+        return returnString.toString() + " ";
     }
+
 }
