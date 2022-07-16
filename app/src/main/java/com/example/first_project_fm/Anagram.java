@@ -17,38 +17,35 @@ public class Anagram {
 
         // Making the anagram for each word
         for (String word : arrayWords) {
-            output.append(buildAnagramOfWord(word, mFilter));
+            output.append(buildAnagramOfWord(new StringBuilder(word), mFilter));
         }
 
         return output.toString();
     }
 
-    private static String buildAnagramOfWord(String word, String mFilter) {
-        StringBuilder str = new StringBuilder(word);
+    private static String buildAnagramOfWord(StringBuilder word, String mFilter) {
 
         for (int i = 0, k = word.length() - 1; i < k; ) {
             if (check(word.charAt(i), mFilter)) {
-                if (check(word.charAt(k), mFilter)) {
-                    char tmp = word.charAt(k);
-                    str.deleteCharAt(k);
-                    str.insert(k, word.charAt(i));
-                    str.deleteCharAt(i);
-                    str.insert(i, tmp);
-                    i++;
-                    k--;
-                } else {
-                    k--;
-                }
-            } else {
                 i++;
+            } else if (check(word.charAt(k), mFilter)) {
+                k--;
+            } else {
+                char tmp = word.charAt(k);
+                word.deleteCharAt(k);
+                word.insert(k, word.charAt(i));
+                word.deleteCharAt(i);
+                word.insert(i, tmp);
+                i++;
+                k--;
             }
         }
-        return str + " ";
+
+        return word + " ";
     }
 
-    private static boolean check(char s, String filter) {
-        String st = String.valueOf(s);
-        return !st.matches(filter);
+    private static boolean check(char i, String filter) {
+        return String.valueOf(i).matches(filter);
     }
 
 }
