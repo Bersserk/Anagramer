@@ -8,31 +8,32 @@ public class Anagram {
 
         // Making the anagram for each word
         for (String word : input.split(" ")) {
-            output.append(buildAnagramOfWord(new StringBuilder(word), filter.isEmpty()?"default":filter));
+            output.append(buildAnagramOfWord(word, filter.isEmpty()?"default":filter));
         }
 
         return output.toString();
     }
 
-    private static String buildAnagramOfWord(StringBuilder word, String filter) {
+    private static String buildAnagramOfWord(String word, String filter) {
+        StringBuilder newWord = new StringBuilder(word);
 
-        for (int i = 0, k = word.length() - 1; i < k; ) {
-            if (check(word.charAt(i), filter)) {
+        for (int i = 0, k = newWord.length() - 1; i < k; ) {
+            if (check(newWord.charAt(i), filter)) {
                 i++;
-            } else if (check(word.charAt(k), filter)) {
+            } else if (check(newWord.charAt(k), filter)) {
                 k--;
             } else {
-                char tmp = word.charAt(k);
-                word.deleteCharAt(k);
-                word.insert(k, word.charAt(i));
-                word.deleteCharAt(i);
-                word.insert(i, tmp);
+                char tmp = newWord.charAt(k);
+                newWord.deleteCharAt(k);
+                newWord.insert(k, newWord.charAt(i));
+                newWord.deleteCharAt(i);
+                newWord.insert(i, tmp);
                 i++;
                 k--;
             }
         }
 
-        return word + " ";
+        return newWord + " ";
     }
 
     private static boolean check(char i, String filter) {
