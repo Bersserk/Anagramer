@@ -6,29 +6,20 @@ public class Anagram {
 
         StringBuilder output = new StringBuilder();
 
-        // Dividing a string into words and adding them into array of words
-        String[] arrayWords = input.split("\\s");
-
-        // Determining the filter
-        String mFilter = "[" + filter + "]";
-        if (filter.equals("")) {
-            mFilter = "[\\W\\d*]";
-        }
-
         // Making the anagram for each word
-        for (String word : arrayWords) {
-            output.append(buildAnagramOfWord(new StringBuilder(word), mFilter));
+        for (String word : input.split(" ")) {
+            output.append(buildAnagramOfWord(new StringBuilder(word), filter.isEmpty()?"default":filter));
         }
 
         return output.toString();
     }
 
-    private static String buildAnagramOfWord(StringBuilder word, String mFilter) {
+    private static String buildAnagramOfWord(StringBuilder word, String filter) {
 
         for (int i = 0, k = word.length() - 1; i < k; ) {
-            if (check(word.charAt(i), mFilter)) {
+            if (check(word.charAt(i), filter)) {
                 i++;
-            } else if (check(word.charAt(k), mFilter)) {
+            } else if (check(word.charAt(k), filter)) {
                 k--;
             } else {
                 char tmp = word.charAt(k);
@@ -45,7 +36,10 @@ public class Anagram {
     }
 
     private static boolean check(char i, String filter) {
-        return String.valueOf(i).matches(filter);
+
+        if (filter.equals("default"))
+            return Character.isAlphabetic(i) ? false : true;
+            return filter.indexOf(i) > -1 ? true : false;
     }
 
 }
