@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">First_Project_FM</string>
     <string name="inputText">Input your text</string>
-    <string name="filtrText">Set your filters characters</string>
+    <string name="filterText">Set your filters characters</string>
     <string name="anagramText">This will be anagram</string>
     <string name="add_your_text">add your text</string>
-    <string name="add_your_filtrText">add your filtr text</string>
+    <string name="add_your_filterText">add your filter text</string>
 
 </resources>
