@@ -36,7 +36,7 @@ public class Anagram {
 
         if (filter.isEmpty())
             return !Character.isAlphabetic(i);
-        return filter.indexOf(i) > -1
+        return filter.indexOf(i) > -1;
     }
 
 }
