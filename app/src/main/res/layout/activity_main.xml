@@ -14,6 +14,8 @@
         android:ems="10"
         android:hint="@string/add_your_text"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +24,7 @@
         app:layout_constraintWidth_percent="0.85" />
 
     <EditText
-        android:id="@+id/filtrText"
+        android:id="@+id/filterText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -30,9 +32,12 @@
         android:ems="10"
         android:hint="@string/add_your_filtrText"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputText"
+        app:layout_constraintVertical_bias="0.15"
         app:layout_constraintWidth_percent="0.85" />
 
     <TextView
@@ -41,9 +46,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:hint="@string/anagramText"
+        android:textColorHint="#757575"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/filtrText"
-        app:layout_constraintStart_toStartOf="@+id/filtrText"
-        app:layout_constraintTop_toBottomOf="@+id/filtrText" />
+        app:layout_constraintEnd_toEndOf="@+id/filterText"
+        app:layout_constraintStart_toStartOf="@+id/filterText"
+        app:layout_constraintTop_toBottomOf="@+id/filterText"
+        app:layout_constraintVertical_bias="0.15"
+        app:layout_constraintWidth_percent="0.85" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
         setContentView(R.layout.activity_main);
 
         inputText = findViewById(R.id.inputText);
-        filterText = findViewById(R.id.filtrText);
+        filterText = findViewById(R.id.filterText);
         resultText = findViewById(R.id.anagramText);
 
         inputText.addTextChangedListener(this);
