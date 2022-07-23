@@ -14,24 +14,23 @@ public class Anagram {
     }
 
     private static String buildAnagramOfWord (String word, String filter) {
-        StringBuilder newWord = new StringBuilder(word);
+        // StringBuilder newWord = new StringBuilder(word);
+        char[] wordArray = word.toCharArray();
 
-        for (int i = 0, k = newWord.length() - 1; i < k; )
-            if (check(newWord.charAt(i), filter)) {
+        for (int i = 0, k = wordArray.length - 1; i < k; )
+            if (check(wordArray[i], filter)) {
                 i++;
-            } else if (check(newWord.charAt(k), filter)) {
+            } else if (check(wordArray[k], filter)) {
                 k--;
             } else {
-                char tmp = newWord.charAt(k);
-                newWord.deleteCharAt(k);
-                newWord.insert(k, newWord.charAt(i));
-                newWord.deleteCharAt(i);
-                newWord.insert(i, tmp);
+                char tmp = wordArray[k];
+                wordArray[k] = wordArray[i];
+                wordArray[i] = tmp;
                 i++;
                 k--;
             }
 
-        return newWord + " ";
+        return String.valueOf(wordArray) + " ";
     }
 
     private static boolean check (char i, String filter) {
